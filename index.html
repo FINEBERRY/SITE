@@ -468,8 +468,21 @@
             const pdfFallback = document.getElementById('pdf-fallback');
             const pdfFallbackLink = document.getElementById('pdf-fallback-link');
 
-            // Netlify-hosted PDF URL for root-level file
-            const pdfUrl = '/FINEBERRY-RESTAURANT-MENU.pdf';
+            // GitHub Pages-hosted PDF URL
+            const pdfUrl = '/SITE/FINEBERRY-RESTAURANT-MENU.pdf';
+
+            // Pre-check PDF availability
+            fetch(pdfUrl, { method: 'HEAD' })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error(`PDF not found at ${pdfUrl}. Status: ${response.status}`);
+                    } else {
+                        console.log(`PDF found at ${pdfUrl}`);
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error checking PDF availability:`, error);
+                });
 
             // Fallback for background image
             const mainContentStyle = window.getComputedStyle(mainContent);
@@ -524,21 +537,21 @@
 
                         openModal(menuModal);
 
-                        // Check if PDF loads within 5 seconds
+                        // Check if PDF loads within 3 seconds
                         setTimeout(() => {
                             if (pdfViewer.contentWindow && !pdfViewer.contentWindow.document.body.innerHTML) {
                                 console.warn('Iframe PDF failed to load, switching to embed');
                                 pdfViewer.style.display = 'none';
                                 pdfEmbed.style.display = 'block';
-                                // Check embed after another 5 seconds
+                                // Check embed after another 3 seconds
                                 setTimeout(() => {
                                     if (!pdfEmbed.getAttribute('data-loaded')) {
                                         console.error('Embed PDF also failed to load, showing fallback');
                                         pdfFallback.style.display = 'block';
                                     }
-                                }, 5000);
+                                }, 3000);
                             }
-                        }, 5000);
+                        }, 3000);
                     }
                 });
             }
@@ -629,105 +642,3 @@
     </script>
 </body>
 </html>
-```
-
-### Changes Made
-1. **Corrected JavaScript Syntax**:
-   - Fixed `pdfFallbackLink` initialization: `getElementById('pdf-fallback-link')`.
-   - Corrected `pdfViewer.contentWindow.document.body` for iframe load check.
-   - Fixed event listeners (e.g., `addEventListener('click', () => {...})`).
-   - Corrected DOM queries in `orderSubmit` (e.g., `getElementById('order-details')`).
-   - Fixed `feedbackSubmit`: Used `getElementById` consistently, corrected variable names, and fixed WhatsApp URL (`+971571` to `+971565256790`).
-   - Removed `navigator` misuse; used `window.open()` directly.
-   - Fixed `openModal` and `closeModal`: Used `modal` instead of undefined `modalContent`.
-   - Corrected `pdfEmbed` listeners: Changed `embedEventListener` to `addEventListener`.
-   - Fixed typos in `setTimeout` and `Array.from` blocks.
-   - Ensured proper string concatenation in `message` for WhatsApp submissions.
-
-2. **PDF URL**:
-   - Kept `pdfUrl = '/FINEBERRY-RESTAURANT-MENU.pdf';` for root-level file.
-   - Ensured `pdfFallbackLink.href` uses same path.
-
-3. **Preserved Features**:
-   - Maintained `<iframe>`/`<embed>` fallback for PDF rendering.
-   - Kept fallback link logic (appears after ~10 seconds if PDF fails).
-   - Retained debugging logs (e.g., `Attempting to load PDF:`).
-   - Preserved button layout (‘View Menu’, ‘Order for Delivery’ centered; ‘Location’, ‘Complaints & Feedback’ at bottom).
-   - Kept ‘Contact Manager’ removed, aesthetic enhancements (Georgia font, gold/navy palette, colors, animations), and fixes (`closeButtons`, Tailwind CDN removal, page loading optimizations).
-
-4. **Minor Cleanup**:
-   - Corrected title and heading: `FineBerry` (consistent capitalization).
-   - Fixed `pdfEmbed.setAttribute('data-loaded', 'true')` to set attribute correctly.
-   - Ensured `pdfFallback.style.display` values are valid (`'none'`).
-
-### Testing Instructions to Test
-1. **Update GitHub Repository**:
-   - Replace `index.html` with the above code.
-   - Ensure `FINEBERRY-RESTAURANT-MEN.pdf` is in the repository root (confirmed).
-   - Commit and push:
-     ```bash
-     git add index.html
-     git commit -m "Fix runtime error and update index.html for PDF"
-     git push origin main
-     ```
-     Replace `main` with your branch if different.
-
-2. **Verify Netlify Deployment**:
-   - In Netlify (https://app.netlify.app/), check “Deploys” to confirm deployment.
-   - Verify `FINEBERRY-RESTAURANT-MEN.pdf` is in root of deployed files.
-   - Test PDF URL: `https://your-site-name.netlify.app/FINEBERRY-RESTAURANT-MEN.pdf`. Should display PDF.
-
-3. **Test Menu Modal**:
-   - Open site, click “View Menu.”
-   - PDF should load in `<iframe>` (or `<embed>` if needed).
-   - If it fails after ~10s for fallback link: “Having trouble viewing the menu? Open it up directly.”
-
-4. **Check Console**:
-   - Open developer tools (F12 → → Console).
-   - Expected:
-     - `Attempting to load PDF: /FINEBERR-RESTAURANT-MEN.pdf`
-     - `Iframe PDF loaded successfully` or `Embed PDF loaded successfully`.
-     - No `Uncaught SyntaxError`.
-   - Share errors if present.
-
-5. **Browser Test**:
-   - Test in Chrome, Firefox, Edge, Safari.
-   - Check extensions for (e.g., ad blockers) blocking PDFs.
-
-### Debug
-- **If `SyntaxError` Persists**:
-  - Open console to pinpoint line number of error.
-  - Share error details or Netlify site URL for verification.
-- **Blank Iframe**:
-  - Confirm `FINEBERRY-RESTAUR-MEN.pdf` filename (case-sensitive).
-  - Check “Deploys” in Netlify for PDF file inclusion.
-  - Test direct PDF URL for 404.
-- **Fallback Link**:
-  - If shown, click to verify” PDF opens.
-  - If not, check JavaScript errors.
-
-### Netlify Notes
-- **MIME**: Auto-set to `application/pdf`.
-- **CORS**: Same-origin avoids issues.
-- **Deploys**: Auto-triggered by GitHub; manual redeploy if needed.
-- **Domain**: Relative paths work with custom domains.
-
-### Fallback
-If PDF fails)
-```javascript
-const pdfUrl = 'https://www.dropbox.com/scl/fi/orgbo3tiodcgl7h3vz8lg/FINEBERRY-RESTAURANT-MEN.pdf?rrlkey=vbcucz0b1ol0lnuvnhrs0g6qgm&&st=wlg3puxf&&dd=1';
-```
-
-### Recommendations
-- **PDF**: Compress `FINEBERR-RESTAURANT-MEN.pdf** with SmallPDF**.
-- **Tailwind**: Use locally compiled CSS in production.
-- **Track**: Use Netlify Analytics or Sentry for monitoring.
-- **HTTPS**: Netlify provides free HTTPS.
-
-Test after deployment. If issues (e.g., blank iframe, new errors), share:
-- Netlify URL
-- Console logs
-- GitHub repo link (if possible, to check structure)
-- Fallback link status
-
-Let me know if you need help with GitHub,,Netlify,, or further debug!
