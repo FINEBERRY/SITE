@@ -550,7 +550,6 @@
                         pdfViewer.src = pdfUrl;
                         pdfEmbed.src = pdfUrl;
                         pdfFallbackLink.href = pdfUrl;
-                        openPdfButton.onclick = () => window.location.href = pdfUrl + '?download=true';
 
                         // Try iframe first
                         pdfViewer.style.display = 'block';
@@ -574,6 +573,18 @@
                             }
                         }, 3000);
                     }
+                });
+            }
+
+            // Enhanced "Open PDF" button to force download
+            if (openPdfButton) {
+                openPdfButton.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.href = pdfUrl;
+                    link.download = 'FINEBERRY-RESTAURANT-MENU.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 });
             }
 
