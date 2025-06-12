@@ -43,33 +43,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FineBerry Restaurant LLC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #facc15;
-            --primary-dark: #eab308;
-            --secondary: #ff6f61;
-            --navy: #1e3a8a;
-            --dark: #0f172a;
-            --white: #ffffff;
-            --gray: #f8fafc;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark);
-            overflow-x: hidden;
-            color: var(--white);
-        }
-
+        /* Comprehensive Tailwind-like CSS utilities */
         .flex { display: flex; }
         .flex-col { flex-direction: column; }
+        .flex-wrap { flex-wrap: wrap; }
         .justify-center { justify-content: center; }
         .items-center { align-items: center; }
         .text-center { text-align: center; }
@@ -77,192 +55,207 @@
         .gap-6 { gap: 1.5rem; }
         .mt-10 { margin-top: 2.5rem; }
         .mb-6 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .p-4 { padding: 1rem; }
         .p-6 { padding: 1.5rem; }
         .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
         .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .px-8 { padding-left: 2rem; padding-right: 2rem; }
+        .p-3 { padding: 0.75rem; }
         .border { border-width: 1px; }
         .border-2 { border-width: 2px; }
-        .border-primary { border-color: var(--primary); }
+        .border-yellow-400 { border-color: #facc15; }
+        .rounded-md { border-radius: 0.375rem; }
         .rounded-lg { border-radius: 0.5rem; }
-        .bg-white { background-color: var(--white); }
-        .bg-primary { background-color: var(--primary); }
-        .bg-dark { background-color: var(--dark); }
-        .bg-gray { background-color: var(--gray); }
+        .rounded-full { border-radius: 9999px; }
+        .bg-white { background-color: #ffffff; }
+        .bg-transparent { background-color: transparent; }
+        .bg-yellow-400 { background-color: #facc15; }
+        .bg-gray-100 { background-color: #f8fafc; }
+        .bg-blue-950 { background-color: #1e3a8a; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
         .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
         .font-bold { font-weight: 700; }
-        .text-primary { color: var(--primary); }
-        .text-navy { color: var(--navy); }
+        .text-blue-950 { color: #1e3a8a; }
+        .text-yellow-400 { color: #facc15; }
         .uppercase { text-transform: uppercase; }
-        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .transition { transition: all 0.3s ease-in-out; }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
+        .transition { transition-property: all; transition-duration: 300ms; transition-timing-function: ease-in-out; }
         .w-full { width: 100%; }
-        .max-w-2xl { max-width: 42rem; }
+        .max-w-xl { max-width: 36rem; }
+        .w-12 { width: 3rem; }
+        .h-12 { height: 3rem; }
         .fixed { position: fixed; }
         .absolute { position: absolute; }
+        .relative { position: relative; }
         .top-0 { top: 0; }
         .left-0 { left: 0; }
+        .bottom-0 { bottom: 0; }
+        .right-0 { right: 0; }
+        .bottom-8 { bottom: 2rem; }
+        .right-4 { right: 1rem; }
+        .z-10 { z-index: 10; }
         .z-50 { z-index: 50; }
-        .z-60 { z-index: 60; }
         .opacity-0 { opacity: 0; }
         .opacity-100 { opacity: 1; }
+        .transform { transform: translate(0, 0); }
+        .translate-x-1\/2 { transform: translateX(-50%); }
+        .scale-110 { transform: scale(1.1); }
+        .translate-y-1 { transform: translateY(-0.25rem); }
+        .block { display: block; }
+        .hidden { display: none; }
 
+        /* Custom styles */
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background: #0f172a;
+        }
         #welcome-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, var(--navy), var(--dark));
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 50;
-            transition: opacity 1.5s ease-in-out;
+            opacity: 1;
+            transition: opacity 2s ease-in-out;
         }
-
         #welcome-screen.fade-out {
             opacity: 0;
             pointer-events: none;
         }
-
         #welcome-text {
-            color: var(--primary);
-            font-size: 3.5rem;
-            font-weight: 700;
+            color: #facc15;
+            font-size: 4rem;
+            font-weight: bold;
             text-transform: uppercase;
-            text-align: center;
+            letter-spacing: 0.15rem;
             opacity: 0;
-            animation: fadeIn 1.2s ease-in forwards;
-            text-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+            animation: fadeIn 1.5s ease-in forwards;
+            text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
         }
-
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px); }
+            0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
         #main-content {
             min-height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease-in-out;
+            text-align: center;
+            position: relative;
             opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
-
         #main-content.visible {
             opacity: 1;
         }
-
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(30, 58, 138, 0.6), rgba(15, 23, 42, 0.7));
+            background: linear-gradient(rgba(30, 58, 138, 0.7), rgba(15, 23, 42, 0.8));
         }
-
         .restaurant-name {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
-            animation: glow 2.5s ease-in-out infinite alternate;
+            color: #facc15;
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
             z-index: 10;
-            text-align: center;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 90%;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.1rem;
+            animation: glow 3s ease-in-out infinite alternate;
         }
-
         @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(250, 204, 21, 0.5); }
-            to { text-shadow: 0 0 20px rgba(250, 204, 21, 0.8); }
+            from { text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); }
+            to { text-shadow: 2px 2px 12px rgba(250, 204, 21, 0.8); }
         }
-
         .button-container {
-            z-index: 10;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 1.5rem;
             margin-top: 2rem;
+            z-index: 10;
+            justify-content: center;
         }
-
         .nav-button {
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            color: var(--navy);
-            padding: 1rem 2rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
+            background: linear-gradient(45deg, #facc15, #eab308);
+            color: #1e3a8a;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: inherit;
             transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 10px rgba(250, 204, 21, 0.3);
         }
-
         .nav-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(250, 204, 21, 0.5);
         }
-
         .secondary-buttons {
             position: fixed;
-            bottom: 6rem; /* Moved up to avoid overlap with social icons */
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 1rem;
-            z-index: 60; /* Higher z-index to appear above social links */
-        }
-
-        .secondary-button {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .secondary-button:hover {
-            background-color: var(--primary);
-            color: var(--navy);
-        }
-
-        .social-links {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            display: flex;
-            gap: 1rem;
             z-index: 10;
         }
-
+        .secondary-button {
+            background: transparent;
+            border: 2px solid #facc15;
+            color: #facc15;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .secondary-button:hover {
+            background-color: #facc15;
+            color: #1e3a8a;
+        }
+        .social-links {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            z-index: 10;
+        }
         .social-button {
-            background: var(--primary);
-            color: var(--navy);
-            width: 48px;
-            height: 48px;
+            background: #facc15;
+            color: #1e3a8a;
+            padding: 0.5rem;
             border-radius: 50%;
+            width: 40px;
+            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: transform 0.3s, background-color 0.3s;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
-
         .social-button:hover {
-            transform: scale(1.15);
-            background-color: var(--primary-dark);
+            transform: scale(1.1);
+            background-color: #eab308;
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -270,121 +263,129 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
             z-index: 50;
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 90%;
-            width: 600px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        #menu-modal .modal-content {
-            max-width: 95%;
-            height: 90vh;
+            background: #ffffff;
             padding: 1.5rem;
+            border-radius: 0.5rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
-
+        #menu-modal .modal-content {
+            background: #ffffff;
+            max-width: 90%;
+            width: 90%;
+            height: 85vh;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .close-button {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.75rem;
+            top: 0.75rem;
+            right: 0.75rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--navy);
+            color: #1e3a8a;
             transition: color 0.3s;
         }
-
         .close-button:hover {
-            color: var(--primary);
+            color: #facc15;
         }
-
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--navy);
-            font-weight: 600;
+            color: #1e3a8a;
+            font-weight: bold;
         }
-
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--primary);
-            border-radius: 0.5rem;
-            background: variable;
+            padding: 0.5rem;
+            border: 2px solid #facc15;
+            border-radius: 0.25rem;
+            background: #f8fafc;
             transition: border-color 0.3s;
         }
-
         .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--primary-dark);
+            border-color: #eab308;
             outline: none;
         }
-
-        .submit-button, .open-pdf-button {
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            color: var(--navy);
-            padding: 1rem 2rem;
+        .submit-button {
+            background: linear-gradient(45deg, #facc15, #eab308);
+            color: #1e3a8a;
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
+            border-radius: 0.375rem;
+            font-weight: bold;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-
-        .submit-button:hover, .open-pdf-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(250, 204, 21, 0.5);
         }
-
+        .open-pdf-button {
+            background: linear-gradient(45deg, #facc15, #eab308);
+            color: #1e3a8a;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .open-pdf-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(250, 204, 21, 0.5);
+        }
         .fallback-link {
             display: none;
             text-align: center;
             margin-top: 1rem;
         }
-
         .fallback-link a {
-            color: var(--navy);
+            color: #1e3a8a;
             text-decoration: underline;
-            font-weight: 600;
+            font-weight: bold;
         }
-
         .fallback-link a:hover {
-            color: var(--primary);
+            color: #facc15;
         }
     </style>
 </head>
 <body>
-    <div id="welcome-screen" role="dialog" aria-label="Welcome Screen">
+    <div id="welcome-screen">
         <h1 id="welcome-text">Welcome</h1>
     </div>
     <div id="main-content">
         <div class="overlay"></div>
         <h1 class="restaurant-name">FineBerry Restaurant</h1>
-        <div class="button-container flex flex-wrap justify-center gap-6">
-            <button id="menu-button" class="nav-button" aria-label="View Menu">View Menu</button>
-            <button id="delivery-button" class="nav-button" aria-label="Order for Delivery">Order for Delivery</button>
+        <div class="button-container">
+            <button id="menu-button" class="nav-button">View Menu</button>
+            <button id="delivery-button" class="nav-button">Order for Delivery</button>
         </div>
-        <div class="secondary-buttons flex gap-4">
-            <a href="https://g.co/kgs/PnnpGGS" target="_blank" class="secondary-button" aria-label="Location">Location</a>
-            <button id="feedback-button" class="secondary-button" aria-label="Complaints & Feedback">Complaints & Feedback</button>
+        <div class="secondary-buttons">
+            <a href="https://g.co/kgs/PnnpGGS" target="_blank" class="secondary-button">Location</a>
+            <button id="feedback-button" class="secondary-button">Complaints & Feedback</button>
         </div>
     </div>
-    <div class="social-links flex gap-4">
+    <div class="social-links">
         <a href="https://www.instagram.com/fineberryrestaurant/?hl=en" target="_blank" class="social-button" aria-label="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.266.071.646.07 4.85s-.012 3.584-.07 4.85c-.061 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.061-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.061-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947. inz.072-1.627.074-3.355.406-4.64 1.691-1.285 1.285-1.617 3.013-1.691 4.64-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.074 1.627.406 3.355 1.691 4.64 1.285 1.285 3.013 1.617 4.64 1.691 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.627-.074 3.355-.406 4.64-1.691 1.285-1.285 1.617-3.013 1.691-4.64.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.074-1.627-.406-3.355-1.691-4.64-1.285-1.285-3.013-1.617-4.64-1.691-1.28-.058-1.688-.072-4.947-.072z"/>
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.266.071.646.07 4.85s-.012 3.584-.07 4.85c-.061 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.061-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.061-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.627.074-3.355.406-4.64 1.691-1.285 1.285-1.617 3.013-1.691 4.64-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.074 1.627.406 3.355 1.691 4.64 1.285 1.285 3.013 1.617 4.64 1.691 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.627-.074 3.355-.406 4.64-1.691 1.285-1.285 1.617-3.013 1.691-4.64.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.074-1.627-.406-3.355-1.691-4.64-1.285-1.285-3.013-1.617-4.64-1.691-1.28-.058-1.688-.072-4.947-.072z"/>
                 <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/>
                 <circle cx="18.406" cy="5.594" r="1.44"/>
             </svg>
@@ -403,65 +404,65 @@
     </div>
 
     <!-- Delivery Order Modal -->
-    <div id="delivery-modal" class="modal" role="dialog" aria-label="Delivery Order Form">
+    <div id="delivery-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" aria-label="Close">×</span>
-            <h2 class="text-3xl font-bold mb-6 text-center text-navy">Place Your Order</h2>
+            <span class="close-button">×</span>
+            <h2 class="text-2xl font-bold mb-4 text-center text-blue-950">Place Your Order</h2>
             <div class="form-group">
                 <label for="order-name">Name</label>
-                <input type="text" id="order-name" required aria-required="true">
+                <input type="text" id="order-name" required>
             </div>
             <div class="form-group">
                 <label for="order-mobile">Mobile Number</label>
-                <input type="tel" id="order-mobile" required aria-required="true">
+                <input type="tel" id="order-mobile" required>
             </div>
             <div class="form-group">
                 <label for="order-building">Building Name</label>
-                <input type="text" id="order-building" required aria-required="true">
+                <input type="text" id="order-building" required>
             </div>
             <div class="form-group">
                 <label for="order-flat">Flat Number</label>
-                <input type="text" id="order-flat" required aria-required="true">
+                <input type="text" id="order-flat" required>
             </div>
             <div class="form-group">
                 <label for="order-details">Type Your Order Here</label>
-                <textarea id="order-details" rows="4" required aria-required="true"></textarea>
+                <textarea id="order-details" rows="4" required></textarea>
             </div>
             <button id="order-submit" class="submit-button">Submit Order</button>
         </div>
     </div>
 
     <!-- Feedback Modal -->
-    <div id="feedback-modal" class="modal" role="dialog" aria-label="Feedback Form">
+    <div id="feedback-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" aria-label="Close">×</span>
-            <h2 class="text-3xl font-bold mb-6 text-center text-navy">Complaints & Feedback</h2>
-            <p class="mb-6 text-center">We value your feedback to elevate our service.</p>
+            <span class="close-button">×</span>
+            <h2 class="text-2xl font-bold mb-4 text-center text-blue-950">Complaints & Feedback</h2>
+            <p class="mb-4 text-center">We value your feedback to elevate our service.</p>
             <div class="form-group">
                 <label for="feedback-name">Name</label>
-                <input type="text" id="feedback-name" required aria-required="true">
+                <input type="text" id="feedback-name" required>
             </div>
             <div class="form-group">
                 <label for="feedback-mobile">Mobile Number</label>
-                <input type="tel" id="feedback-mobile" required aria-required="true">
+                <input type="tel" id="feedback-mobile" required>
             </div>
             <div class="form-group">
                 <label for="feedback-details">Your Feedback/Complaint</label>
-                <textarea id="feedback-details" rows="4" required aria-required="true"></textarea>
+                <textarea id="feedback-details" rows="4" required></textarea>
             </div>
             <button id="feedback-submit" class="submit-button">Submit</button>
         </div>
     </div>
 
     <!-- PDF Viewer Modal -->
-    <div id="menu-modal" class="modal" role="dialog" aria-label="Menu Viewer">
+    <div id="menu-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" aria-label="Close">×</span>
+            <span class="close-button">×</span>
             <div id="pdf-container" style="width: 100%; height: calc(100% - 4rem);">
                 <iframe id="pdf-viewer" src="" style="width: 100%; height: 100%; border: none; display: none;" title="FineBerry Restaurant Menu"></iframe>
                 <embed id="pdf-embed" src="" type="application/pdf" style="width: 100%; height: 100%; display: none;" />
             </div>
-            <button id="open-pdf-button" class="open-pdf-button">Download Menu</button>
+            <button id="open-pdf-button" class="open-pdf-button">Open PDF</button>
             <div id="pdf-fallback" class="fallback-link">
                 <p>Having trouble viewing the menu? <a href="#" id="pdf-fallback-link" target="_blank">Open it directly</a>.</p>
             </div>
@@ -470,183 +471,205 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const elements = {
-                welcomeScreen: document.getElementById('welcome-screen'),
-                mainContent: document.getElementById('main-content'),
-                deliveryModal: document.getElementById('delivery-modal'),
-                feedbackModal: document.getElementById('feedback-modal'),
-                menuModal: document.getElementById('menu-modal'),
-                deliveryButton: document.getElementById('delivery-button'),
-                feedbackButton: document.getElementById('feedback-button'),
-                menuButton: document.getElementById('menu-button'),
-                orderSubmit: document.getElementById('order-submit'),
-                feedbackSubmit: document.getElementById('feedback-submit'),
-                closeButtons: document.getElementsByClassName('close-button'),
-                pdfViewer: document.getElementById('pdf-viewer'),
-                pdfEmbed: document.getElementById('pdf-embed'),
-                pdfFallback: document.getElementById('pdf-fallback'),
-                pdfFallbackLink: document.getElementById('pdf-fallback-link'),
-                openPdfButton: document.getElementById('open-pdf-button')
-            };
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            const deliveryModal = document.getElementById('delivery-modal');
+            const feedbackModal = document.getElementById('feedback-modal');
+            const menuModal = document.getElementById('menu-modal');
+            const deliveryButton = document.getElementById('delivery-button');
+            const feedbackButton = document.getElementById('feedback-button');
+            const menuButton = document.getElementById('menu-button');
+            const orderSubmit = document.getElementById('order-submit');
+            const feedbackSubmit = document.getElementById('feedback-submit');
+            const closeButtons = document.getElementsByClassName('close-button');
+            const pdfViewer = document.getElementById('pdf-viewer');
+            const pdfEmbed = document.getElementById('pdf-embed');
+            const pdfFallback = document.getElementById('pdf-fallback');
+            const pdfFallbackLink = document.getElementById('pdf-fallback-link');
+            const openPdfButton = document.getElementById('open-pdf-button');
 
+            // GitHub Pages-hosted PDF URL
             const pdfUrl = '/SITE/FINEBERRY-RESTAURANT-MENU.pdf';
 
-            // Lazy-load background image
-            const loadBackgroundImage = () => {
-                const img = new Image();
-                img.src = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80';
-                img.onload = () => elements.mainContent.style.backgroundImage = `url(${img.src})`;
-                img.onerror = () => {
-                    console.warn('Background image failed to load, using fallback color');
-                    elements.mainContent.style.backgroundColor = 'var(--dark)';
-                };
-            };
+            // Pre-check PDF availability
+            fetch(pdfUrl, { method: 'HEAD' })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error(`PDF not found at ${pdfUrl}. Status: ${response.status}`);
+                    } else {
+                        console.log(`PDF found at ${pdfUrl}`);
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error checking PDF availability:`, error);
+                });
 
-            // Modal handling
-            const openModal = (modal) => {
-                modal.style.display = 'flex';
-                modal.querySelector('input, button')?.focus();
-            };
-
-            const closeModal = (modal) => {
-                modal.style.display = 'none';
-                if (modal === elements.menuModal) {
-                    elements.pdfViewer.src = '';
-                    elements.pdfEmbed.src = '';
-                    elements.pdfViewer.style.display = 'none';
-                    elements.pdfEmbed.style.display = 'none';
-                    elements.pdfFallback.style.display = 'none';
-                }
-            };
+            // Fallback for background image
+            const mainContentStyle = window.getComputedStyle(mainContent);
+            if (!mainContentStyle.backgroundImage.includes('url')) {
+                console.warn('Background image failed to load, using fallback color');
+                mainContent.style.backgroundColor = '#0f172a';
+            }
 
             // Welcome screen animation
             setTimeout(() => {
-                elements.welcomeScreen.classList.add('fade-out');
-                elements.mainContent.classList.add('visible');
-                setTimeout(() => elements.welcomeScreen.style.display = 'none', 1500);
-                loadBackgroundImage();
+                if (welcomeScreen) {
+                    welcomeScreen.classList.add('fade-out');
+                    if (mainContent) mainContent.classList.add('visible');
+                    setTimeout(() => {
+                        welcomeScreen.style.display = 'none';
+                    }, 2000);
+                }
             }, 2000);
 
-            // Event listeners
-            elements.deliveryButton.addEventListener('click', () => openModal(elements.deliveryModal));
-            elements.feedbackButton.addEventListener('click', () => openModal(elements.feedbackModal));
-            elements.menuButton.addEventListener('click', () => {
-                elements.pdfViewer.src = pdfUrl;
-                elements.pdfEmbed.src = pdfUrl;
-                elements.pdfFallbackLink.href = pdfUrl;
-                elements.pdfViewer.style.display = 'block';
-                elements.pdfEmbed.style.display = 'none';
-                openModal(elements.menuModal);
+            // Modal handling
+            function openModal(modal) {
+                if (modal) modal.style.display = 'flex';
+            }
 
-                setTimeout(() => {
-                    if (!elements.pdfViewer.contentWindow?.document.body.innerHTML) {
-                        console.warn('Iframe PDF failed to load, switching to embed');
-                        elements.pdfViewer.style.display = 'none';
-                        elements.pdfEmbed.style.display = 'block';
+            function closeModal(modal) {
+                if (modal) {
+                    modal.style.display = 'none';
+                    if (modal === menuModal && pdfViewer && pdfEmbed) {
+                        pdfViewer.src = '';
+                        pdfEmbed.src = '';
+                        pdfViewer.style.display = 'none';
+                        pdfEmbed.style.display = 'none';
+                        if (pdfFallback) pdfFallback.style.display = 'none';
+                    }
+                }
+            }
+
+            // Button event listeners
+            if (deliveryButton) deliveryButton.addEventListener('click', () => openModal(deliveryModal));
+            if (feedbackButton) feedbackButton.addEventListener('click', () => openModal(feedbackModal));
+            if (menuButton) {
+                menuButton.addEventListener('click', () => {
+                    if (pdfViewer && pdfEmbed && pdfFallback && pdfFallbackLink && openPdfButton) {
+                        console.log('Attempting to load PDF:', pdfUrl);
+                        pdfViewer.src = pdfUrl;
+                        pdfEmbed.src = pdfUrl;
+                        pdfFallbackLink.href = pdfUrl;
+
+                        // Try iframe first
+                        pdfViewer.style.display = 'block';
+                        pdfEmbed.style.display = 'none';
+
+                        openModal(menuModal);
+
+                        // Check if PDF loads within 3 seconds
                         setTimeout(() => {
-                            if (!elements.pdfEmbed.getAttribute('data-loaded')) {
-                                console.error('Embed PDF failed to load, showing fallback');
-                                elements.pdfFallback.style.display = 'block';
+                            if (pdfViewer.contentWindow && !pdfViewer.contentWindow.document.body.innerHTML) {
+                                console.warn('Iframe PDF failed to load, switching to embed');
+                                pdfViewer.style.display = 'none';
+                                pdfEmbed.style.display = 'block';
+                                // Check embed after another 3 seconds
+                                setTimeout(() => {
+                                    if (!pdfEmbed.getAttribute('data-loaded')) {
+                                        console.error('Embed PDF also failed to load, showing fallback');
+                                        pdfFallback.style.display = 'block';
+                                    }
+                                }, 3000);
                             }
                         }, 3000);
                     }
-                }, 3000);
-            });
+                });
+            }
 
-            elements.openPdfButton.addEventListener('click', () => {
-                const link = document.createElement('a');
-                link.href = pdfUrl;
-                link.download = 'FINEBERRY-RESTAURANT-MENU.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
+            // Enhanced "Open PDF" button to force download
+            if (openPdfButton) {
+                openPdfButton.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.href = pdfUrl;
+                    link.download = 'FINEBERRY-RESTAURANT-MENU.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+            }
 
-            Array.from(elements.closeButtons).forEach(button => {
+            // Close modals with buttons
+            Array.from(closeButtons).forEach(button => {
                 button.addEventListener('click', () => {
-                    closeModal(elements.deliveryModal);
-                    closeModal(elements.feedbackModal);
-                    closeModal(elements.menuModal);
+                    closeModal(deliveryModal);
+                    closeModal(feedbackModal);
+                    closeModal(menuModal);
                 });
             });
 
+            // Close modals when clicking outside
             window.addEventListener('click', (event) => {
-                if (event.target === elements.deliveryModal) closeModal(elements.deliveryModal);
-                if (event.target === elements.feedbackModal) closeModal(elements.feedbackModal);
-                if (event.target === elements.menuModal) closeModal(elements.menuModal);
+                if (event.target === deliveryModal) closeModal(deliveryModal);
+                if (event.target === feedbackModal) closeModal(feedbackModal);
+                if (event.target === menuModal) closeModal(menuModal);
             });
 
-            // Form submissions
-            const submitForm = (formData, endpoint) => {
-                if (Object.values(formData).every(val => val)) {
-                    const message = Object.entries(formData)
-                        .map(([key, value]) => `${key}: ${value}`)
-                        .join('\n');
-                    const whatsappUrl = `https://wa.me/+971565256790?text=${encodeURIComponent(message)}`;
-                    window.open(whatsappUrl, '_blank');
-                    return true;
-                }
-                alert('Please fill out all fields');
-                return false;
-            };
+            // Order submission
+            if (orderSubmit) {
+                orderSubmit.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const name = document.getElementById('order-name')?.value;
+                    const mobile = document.getElementById('order-mobile')?.value;
+                    const building = document.getElementById('order-building')?.value;
+                    const flat = document.getElementById('order-flat')?.value;
+                    const order = document.getElementById('order-details')?.value;
 
-            elements.orderSubmit.addEventListener('click', () => {
-                const formData = {
-                    Name: elements.orderSubmit.closest('.modal-content').querySelector('#order-name').value,
-                    Mobile: elements.orderSubmit.closest('.modal-content').querySelector('#order-mobile').value,
-                    Building: elements.orderSubmit.closest('.modal-content').querySelector('#order-building').value,
-                    Flat: elements.orderSubmit.closest('.modal-content').querySelector('#order-flat').value,
-                    Order: elements.orderSubmit.closest('.modal-content').querySelector('#order-details').value
-                };
-                if (submitForm(formData, 'New Order')) {
-                    closeModal(elements.deliveryModal);
-                    alert('Order submitted successfully!');
-                }
-            });
+                    if (name && mobile && building && flat && order) {
+                        const message = `New Order:\nName: ${name}\nMobile: ${mobile}\nBuilding: ${building}\nFlat: ${flat}\nOrder: ${order}`;
+                        const whatsappUrl = `https://wa.me/+971565256790?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappUrl, '_blank');
+                        closeModal(deliveryModal);
+                        alert('Order submitted successfully!');
+                    } else {
+                        alert('Please fill out all fields');
+                    }
+                });
+            }
 
-            elements.feedbackSubmit.addEventListener('click', () => {
-                const formData = {
-                    Name: elements.feedbackSubmit.closest('.modal-content').querySelector('#feedback-name').value,
-                    Mobile: elements.feedbackSubmit.closest('.modal-content').querySelector('#feedback-mobile').value,
-                    Details: elements.feedbackSubmit.closest('.modal-content').querySelector('#feedback-details').value
-                };
-                if (submitForm(formData, 'Feedback/Complaint')) {
-                    closeModal(elements.feedbackModal);
-                    alert('Feedback submitted successfully!');
-                }
-            });
+            // Feedback submission
+            if (feedbackSubmit) {
+                feedbackSubmit.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const name = document.getElementById('feedback-name')?.value;
+                    const mobile = document.getElementById('feedback-mobile')?.value;
+                    const feedback = document.getElementById('feedback-details')?.value;
 
-            // PDF error handling
-            elements.pdfViewer.addEventListener('load', () => {
-                console.log('Iframe PDF loaded successfully');
-                elements.pdfFallback.style.display = 'none';
-            });
+                    if (name && mobile && feedback) {
+                        const message = `Feedback/Complaint:\nName: ${name}\nMobile: ${mobile}\nDetails: ${feedback}`;
+                        const whatsappUrl = `https://wa.me/+971565256790?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappUrl, '_blank');
+                        closeModal(feedbackModal);
+                        alert('Feedback submitted successfully!');
+                    } else {
+                        alert('Please fill out all fields');
+                    }
+                });
+            }
 
-            elements.pdfViewer.addEventListener('error', () => {
-                console.error('Iframe failed to load PDF:', pdfUrl);
-                elements.pdfViewer.style.display = 'none';
-                elements.pdfEmbed.style.display = 'block';
-            });
+            // Handle PDF viewer errors
+            if (pdfViewer) {
+                pdfViewer.addEventListener('error', () => {
+                    console.error('Iframe failed to load PDF:', pdfUrl);
+                    pdfViewer.style.display = 'none';
+                    pdfEmbed.style.display = 'block';
+                });
+                pdfViewer.addEventListener('load', () => {
+                    console.log('Iframe PDF loaded successfully');
+                    pdfFallback.style.display = 'none';
+                });
+            }
 
-            elements.pdfEmbed.addEventListener('load', () => {
-                console.log('Embed PDF loaded successfully');
-                elements.pdfEmbed.setAttribute('data-loaded', 'true');
-                elements.pdfFallback.style.display = 'none';
-            });
-
-            elements.pdfEmbed.addEventListener('error', () => {
-                console.error('Embed failed to load PDF:', pdfUrl);
-                elements.pdfFallback.style.display = 'block';
-            });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeModal(elements.deliveryModal);
-                    closeModal(elements.feedbackModal);
-                    closeModal(elements.menuModal);
-                }
-            });
+            if (pdfEmbed) {
+                pdfEmbed.addEventListener('error', () => {
+                    console.error('Embed failed to load PDF:', pdfUrl);
+                    pdfFallback.style.display = 'block';
+                });
+                pdfEmbed.addEventListener('load', () => {
+                    console.log('Embed PDF loaded successfully');
+                    pdfEmbed.setAttribute('data-loaded', 'true');
+                    pdfFallback.style.display = 'none';
+                });
+            }
         });
     </script>
 </body>
