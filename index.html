@@ -142,9 +142,19 @@
             animation: fadeIn 1.5s ease-in forwards;
             text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
         }
+        #welcome-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards 0.5s;
+        }
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
         #main-content {
             min-height: 100vh;
@@ -210,7 +220,7 @@
         }
         .secondary-buttons {
             position: fixed;
-            bottom: 4rem; /* Increased from 3rem to 4rem to move higher */
+            bottom: 4rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -364,21 +374,31 @@
         .fallback-link a:hover {
             color: #facc15;
         }
+        .logo {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            width: 100px;
+            height: 100px;
+            z-index: 20;
+        }
     </style>
 </head>
 <body>
     <div id="welcome-screen">
+        <img id="welcome-logo" src="/logo.png" alt="FineBerry Logo">
         <h1 id="welcome-text">Welcome</h1>
     </div>
     <div id="main-content">
         <div class="overlay"></div>
+        <img src="/logo.png" alt="FineBerry Logo" class="logo">
         <h1 class="restaurant-name">FineBerry Restaurant</h1>
         <div class="button-container">
             <button id="menu-button" class="nav-button">View Menu</button>
             <button id="delivery-button" class="nav-button">Order for Delivery</button>
         </div>
         <div class="secondary-buttons">
-            <a href="https://g.co/kgs/PnnpGGS" target="_blank" class="secondary-button">Location</a>
+            <a href="https://maps.app.goo.gl/iDAfTEKehmqBaxUj9" target="_blank" class="secondary-button">Location</a>
             <button id="feedback-button" class="secondary-button">Complaints & Feedback</button>
         </div>
     </div>
