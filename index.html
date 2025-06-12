@@ -102,6 +102,7 @@
         .top-0 { top: 0; }
         .left-0 { left: 0; }
         .z-50 { z-index: 50; }
+        .z-60 { z-index: 60; }
         .opacity-0 { opacity: 0; }
         .opacity-100 { opacity: 1; }
 
@@ -112,6 +113,9 @@
             width: 100%;
             height: 100vh;
             background: linear-gradient(135deg, var(--navy), var(--dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 50;
             transition: opacity 1.5s ease-in-out;
         }
@@ -126,6 +130,7 @@
             font-size: 3.5rem;
             font-weight: 700;
             text-transform: uppercase;
+            text-align: center;
             opacity: 0;
             animation: fadeIn 1.2s ease-in forwards;
             text-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
@@ -142,6 +147,10 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             transition: opacity 1s ease-in-out;
             opacity: 0;
         }
@@ -166,6 +175,10 @@
             text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
             animation: glow 2.5s ease-in-out infinite alternate;
             z-index: 10;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 90%;
         }
 
         @keyframes glow {
@@ -175,6 +188,9 @@
 
         .button-container {
             z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -197,11 +213,12 @@
 
         .secondary-buttons {
             position: fixed;
-            bottom: 2rem;
+            bottom: 6rem; /* Moved up to avoid overlap with social icons */
             left: 50%;
             transform: translateX(-50%);
+            display: flex;
             gap: 1rem;
-            z-index: 10;
+            z-index: 60; /* Higher z-index to appear above social links */
         }
 
         .secondary-button {
@@ -223,6 +240,7 @@
             position: fixed;
             bottom: 1.5rem;
             right: 1.5rem;
+            display: flex;
             gap: 1rem;
             z-index: 10;
         }
@@ -305,7 +323,7 @@
             padding: 0.75rem;
             border: 2px solid var(--primary);
             border-radius: 0.5rem;
-            background: var(--gray);
+            background: variable;
             transition: border-color 0.3s;
         }
 
@@ -366,7 +384,7 @@
     <div class="social-links flex gap-4">
         <a href="https://www.instagram.com/fineberryrestaurant/?hl=en" target="_blank" class="social-button" aria-label="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.266.071.646.07 4.85s-.012 3.584-.07 4.85c-.061 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.061-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.061-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.627.074-3.355.406-4.64 1.691-1.285 1.285-1.617 3.013-1.691 4.64-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.074 1.627.406 3.355 1.691 4.64 1.285 1.285 3.013 1.617 4.64 1.691 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.627-.074 3.355-.406 4.64-1.691 1.285-1.285 1.617-3.013 1.691-4.64.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.074-1.627-.406-3.355-1.691-4.64-1.285-1.285-3.013-1.617-4.64-1.691-1.28-.058-1.688-.072-4.947-.072z"/>
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.266.071.646.07 4.85s-.012 3.584-.07 4.85c-.061 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.061-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.061-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947. inz.072-1.627.074-3.355.406-4.64 1.691-1.285 1.285-1.617 3.013-1.691 4.64-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.074 1.627.406 3.355 1.691 4.64 1.285 1.285 3.013 1.617 4.64 1.691 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.627-.074 3.355-.406 4.64-1.691 1.285-1.285 1.617-3.013 1.691-4.64.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.074-1.627-.406-3.355-1.691-4.64-1.285-1.285-3.013-1.617-4.64-1.691-1.28-.058-1.688-.072-4.947-.072z"/>
                 <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/>
                 <circle cx="18.406" cy="5.594" r="1.44"/>
             </svg>
