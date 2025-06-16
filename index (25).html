@@ -1,0 +1,153 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fineberry Group - UAE's Finest Retail & Hospitality</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.5/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const Navbar = () => (
+      <nav className="bg-green-800 text-white fixed w-full z-10 top-0 shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <div className="text-2xl font-bold">Fineberry Group</div>
+            <div className="space-x-4">
+              <a href="#home" className="hover:text-green-200">Home</a>
+              <a href="#about" className="hover:text-green-200">About</a>
+              <a href="#mission" className="hover:text-green-200">Mission</a>
+              <a href="#contact" className="hover:text-green-200">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+
+    const Hero = () => (
+      <section id="home" className="h-screen bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}>
+        <div className="text-center bg-green-900 bg-opacity-70 p-10 rounded-lg">
+          <h1 className="text-5xl font-extrabold mb-4">The UAE's Finest & Most Modern</h1>
+          <p className="text-xl">Fineberry Group - Redefining Retail & Hospitality</p>
+        </div>
+      </section>
+    );
+
+    const About = () => (
+      <section id="about" className="py-20 bg-green-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center mb-10 text-green-800">About Fineberry</h2>
+          <p className="text-lg text-green-700 leading-relaxed">
+            Since our inception in 2005, Fineberry has redefined the UAE's retail and hospitality landscape with an exquisite blend of modernity and elegance. Our distinguished portfolio of minimarts, restaurants, and cafés embodies a sophisticated vision, seamlessly integrating innovation with unparalleled accessibility. We aspire to be the cherished cornerstone of every neighborhood—a refined haven where effortless shopping converges with an enchanting, charismatic ambiance. As trailblazers in the UAE's retail and hospitality sectors, Fineberry is synonymous with pioneering ingenuity and cultivated sophistication, crafting spaces that elevate the everyday into the extraordinary.
+          </p>
+        </div>
+      </section>
+    );
+
+    const Mission = () => (
+      <section id="mission" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center mb-10 text-green-800">Our Mission & Vision</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-green-50 p-6 rounded-lg shadow-md">
+              <h3 className="text-2xl font-semibold mb-4 text-green-700">Our Mission</h3>
+              <p className="text-green-600">
+                At Fineberry, our mission is singularly devoted to the artful modernization of the retail and service industries within the UAE, the world's visionary nation of the future. We are committed to crafting an elevated experience, where innovation harmonizes with timeless elegance, transforming everyday interactions into moments of refined sophistication and seamless convenience.
+              </p>
+            </div>
+            <div className="bg-green-50 p-6 rounded-lg shadow-md">
+              <h3 className="text-2xl font-semibold mb-4 text-green-700">Our Vision</h3>
+              <p className="text-green-600">
+                We ensure shopping is a pleasure, not a burden—seamless in experience, considerate in price. We bring not only the most modern, but truly futuristic innovations to the service industry of the UAE, redefining excellence with every step forward. With unwavering commitment, we remain mindful of society and our environment, giving generously and responsibly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    const Contact = () => (
+      <section id="contact" className="py-20 bg-green-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center mb-10">Get in Touch</h2>
+          <div className="max-w-lg mx-auto">
+            <p className="text-lg mb-6 text-center">
+              We'd love to hear from you! Reach out to us for inquiries, partnerships, or to learn more about Fineberry Group.
+            </p>
+            <div className="space-y-4">
+              <p className="text-center">Email: fineberrymart@gmail.com</p>
+              <p className="text-center">Phone: +971 4 548 4852</p>
+              <p className="text-center">Address: Fineberry Group, PO Box 233891, Dubai, UAE</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    const Footer = () => (
+      <footer className="bg-green-900 text-white py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>© 2025 Fineberry Group. All rights reserved.</p>
+        </div>
+      </footer>
+    );
+
+    const App = () => (
+      <div>
+        <Navbar />
+        <Hero />
+        <About />
+        <Mission />
+        <Contact />
+        <Footer />
+      </div>
+    );
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
